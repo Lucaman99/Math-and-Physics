@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\title{Basic Quantum Perceptron Models}
+\author{Jack Ceroni}
+\date{November 2018}
+
+\begin{document}
+
+\maketitle
+\textit{
+In this article, I will be talking about how I was able to create a basic activator function which could be used in perceptron networks completely out of quantum gates. Although using this framework to model perceptrons does not demonstrate any immediate quantum advantage, nor does it really utilize many quantum mechanical effects, I am going to continue looking into the use of quantum circuits in perceptron networks, and hopefully, this work will yield something interesting in the future. This post is merely meant to be an exposition to this project, and I will hopefully continue writing more blog posts on other interesting things that I find.
+\newline\newline
+This is my first attempt at creating my own quantum algorithm, so my work has resulted in a fairly unimpressive result, which doesn’t utilize nuances of quantum computing to a great extent, but hopefully, this project will lead to more interesting results at some point.}
+\newline\newline
+\begin{center}
+$\textbf{Part 1: Perceptrons}$
+\end{center}
+\newline\newline
+With the field of machine learning, there is a certain concept known as a neural network. Neural networks are essentially systems of nodes that map to one another, with a structure that is supposed to mimic the functionality of neurons within the human brain. Neural networks can be used to classify and make more and more accurate predictions over time, about certain information inputted into it. One of the main algorithms used within neural networks is the concept of a $\textbf{perceptron}$. Essentially, the perceptron is a function that takes a collection of binary inputs, $\{x_i\}$, and then spits out one binary output. For the general perceptron, this function looks something like this:
+\newline
+\begin{center}
+$P(x) \ = \ \begin{cases} \text{1} \ \ \Big( \displaystyle\sum_{i \ = \ 0}^{a} \ w_{i}x_{i} \Big) \ + \ b \ > \ 0 \\ \text{0} \ \ \text{otherwise} \end{cases}$
+\end{center}
+\vspace{7}
+Essentially, this means that we are taking the sum of all the input values to the function, and if the sum is greater than $0$ the function will output $1$, whereas if that sum is not greater than $0$, then the perceptron will output $0$. We can actually think of these functions as neurons within our own brains. This function is saying that if there is a large enough signal being inputted into a neuron, then it will “fire” and output its own signal. If the input signal is not large enough, then the neuron won’t “fire” its own signal. As can be seen in the perceptron function, there are two values, $w$ and $b$ that are also taken into account when the perceptron is deciding whether to fire or not. These are known as the \textbf{weight }and the \textbf{bias} respectively. The weight is just a coefficient that we apply to each corresponding input parameter. In the context of the human brain, we can think of weights as being the strength of the connectivity between the input signal and the activator function. Take one of the input parameters for example. If we have a higher weight corresponding to that input parameter, then the number being inputted into the activator will be higher, giving us a greater probability of the neuron “firing” an output signal. The bias is just a number that we add to the final sum of the weights and input parameters. The bias simply allows us to adjust and scale the input into the activator.
+\newline\newline
+To create neural networks, multiple \textbf{layers} of perceptrons must be put together. This involves inputting data into a row of perceptrons, who then output data that is then inputted into another layer, and so on, until we have our desired output. The number of layers in a neural network can range greatly, from only one to many, depending on the complexity of the algorithm.
+\newline\newline
+\begin{center}
+$\textbf{Part 2: A Quantum Activator Function}$
+\end{center}
+\newline\newline
+With this basic understanding of perceptrons, we can now consider what would happen if we incorporated quantum computational theory into these algorithms. Specifically, we can create a basic activator function that will function exactly like a perceptron out of quantum gates. This is not inherently useful, as there is no immediate quantum advantage in using quantum gates for an activator function, however, if someone were to discover a way to make perceptron networks more efficient by using qubits rather than regular bits, they could possibly utilize this activator function in their models.
+I created this activator function by essentially playing around with a few different ideas, and while I was working on a different project, I realized that certain parts of it could be applied to effectively create a perceptron. I tested out this circuit schematic a few times, and then found that it could be proven that this configuration would work for any number of qubits using basic combinatorics. I will first outline the circuit, and then I will show a little bit of mathematics to support it.
+\newline\newline
+At the moment, this quantum circuit can simulate perceptrons with an arbitrary bias, but only with input parameters that all have a corresponding weight of $1$. I hope to improve upon the algorithm in the future to allow for arbitrary weights as well. 
+\newline\newline
+\textbf{IMPORTANT NOTE}
+\newline\newline
+At the moment this algorithm only uses $n$-qubit, Controlled-$NOT$ gates, so the algorithm is not very “quantum mechanical”, however I hope to improve upon the basic algorithm structure in the future, making it more efficient utilizing quantum mechanical effects on specialized quantum gates.
+\newline\newline
+\textbf{The Circuit}
+\newline\newline
+Firstly, the perceptron circuit must take two inputs: the input parameters being passed into the perceptron, and the the bias. With each of the weights being $1$, it only makes sense for the bias to be negative or $0$, since it it weren’t, then the perceptron would fire with any input. In this case, with the weights all as $1$, our perceptron function becomes:
+\newline
+\begin{center}
+$P(x) \ = \ \begin{cases} \text{1} \ \ \Big( \displaystyle\sum_{i \ = \ 0}^{a} \ x_{i} \Big) \ + \ b \ > \ 0 \\ \text{0} \ \ \text{otherwise} \end{cases}$
+\end{center}
+\vspace{7}
+This is interesting. If the bias is negative, it is effectively acting as a \textbf{threshold} for our perception, where the number of all the $x_i$ inputs, where $x_i \ = \ 1$ have to exceed $| b |$ or else the perceptrons won’t fire.
+\newline\newline
+The circuit design is essentially a series of Controlled-$NOT$ gates, but instead of standard $CNOT$ and Toffoli gates, these controlled gates often have more than $2$ control qubits being passed through the gate. Specifically, for $n$ input qubits, the circuit consists of a series of these controlled gates, first acting on each possible combination of $(|b | + 1)$-qubit input to a Toffoli gate, storing these results, then passing them through each combination of Controlled-$NOT$ ranging from $1$ to $n$ controlled inputs, all of which map to one target qubit. In the second stage of the circuit, the target qubit is always the same, and will be one extra qubit that is initialized to $|0\rangle$ at the beginning of the circuit.
+\newline\newline
+This is very difficult to visualize, so I will provide an example. This is what the circuit would look like for a bias of $-1$ and $3$ input qubits:
+\newline\newline
+\includegraphics[width=\textwidth]{pic.png}
+\newline\newline
+(The three Hadamard gates on the first few qubits can be ignored for now, they will be discussed later, in Part 3.)
+\newline\newline
+Our input qubits or qubit $(0, \ 0)$, $(0, \ 1)$, and $(0, \ 2)$ in this diagram. Qubit $(0, \ 9)$ is our final target qubit, qubits $(0, \ 3)$, $(0, \ 4)$ and $(0, \ 5)$ are our intermediary target qubits, and qubits $(0, \ 6)$ and $(0, \ 7)$ \textbf{work qubits}. They allows us to create Controlled-$NOT$ gates with more than $2$ inputs, by using only $CNOT$ and Toffoli gates. It would appear as though I failed to include qubit $(0, \ 8)$, but it doesn't matter, as the numbers are simply labels. Let’s split this diagram into a few different sections, so we can talk about them individually, in more depth:
+\newline\newline
+\includegraphics[width=\textwidth]{circuit.png}
+\newline\newline
+In section 1, we initialize all of our qubits, all of which will be set to $|0\rangle$, except for the input qubits, which will be either $|0\rangle$ or $|1\rangle$, based on what the person interacting with the algorithm wants. In section 2, three Hadamard gates are applied to each of the control qubits. This will be discussed later, in Part 3.
+\newline\newline
+In section 3, we implement Toffoli gates that reflect every possible way we can "choose" two qubits from the three that we have inputted. The goal of this is to check whether any possible combination of qubits has exceeded the threshold. In this case, we are looking to see if the number of qubits inputted as $|1\rangle$ has exceeded $1$, which means that we must have \textbf{at least} two qubits set to $|1\rangle$. This circuit configuration checks this. 
+\newline\newline
+In the next sections, we implement every possible combination of qubits, for every possible number of "choices" from the three values that the previous Toffoli gates have yielded. I will explain the mathematical reasoning for this later.
+\newline\newline
+In sections 4 and 5, we implement a “Toffoli gate” but with three control qubits rather than two. This interesting method of creating an $n$-qubit Controlled-$NOT$ gate is outlined in Nielsen & Chuang’s textbook on quantum computing. This method of computation essentially creates the gate and applies it to the target qubit (as can be seen in section 4), and then “un-computes” itself by applying the same gates in a reverse order (as can be seen in section 5). This process was first proposed in 1973, by Charlie Bennett.
+\newline\newline
+In order to actually create $n$-qubit Controlled-$NOT$ gate, we must follow a few steps. We must first initialize $n$ control qubits. Their states will vary, based on what the individual creating the circuit wants to input into the gate. We must then create a target qubit, which will be initialized to $|0\rangle$, and $n \ - \ 1$ work qubits, in order to aid in the construction of the gate. We will then apply a Toffoli gate with the first two qubits as control qubits, and the first work qubit as the target. We will then continuously apply Toffoli gates with the next qubit (qubit $3$, qubit $4$, qubit $5$, … , qubit $n$) and the preceding work qubit (work qubit $1$, work qubit $2$, work qubit $3$, … , work qubit $n \ - \ 2$) as control qubits, and the target qubit being the next work qubit (work qubit $2$, work qubit $3$, work qubit $4$, … , work qubit $n \ - \ 1$) . We will then apply finally apply a $CNOT$ gate from the last work qubit, to the overall target qubit. After this, the computation is reversed, and all the work qubits are reverted back to $|0\rangle$ by applying the same sequence of Toffoli gates in the reverse order.
+\newline\newline
+\textit{In this next section, when I refer to a qubit being “equal to one” or “equal to zero”, I am referring to it being in the} $|1\rangle$\textit{ state or the} $|1\rangle$ \textit{state respectively.}
+\newline\newline
+I am not going to go through a rigorous, mathematical proof that this method works in this post, but if thought about logically, this gate makes sense. For now, I am going to stick with the specific example of the $3$-qubit case, but as will be seen, this logic can be generalized to any $n$-qubit controlled gate. The first Toffoli gate determines if both the first and second control qubits are equal to one, and then “copies” that value ($|1\rangle$ if they are both $|1\rangle$, $|0\rangle$ if they aren’t) to the first work qubit, which is then used in another Toffoli gate. This gate will only “fire” if control qubit three is equal to one, and if the work qubit is equal one. The work qubit is dependent on if both qubit one and qubit two are one, therefore, this gate requires that all three qubits equal one, in order to “fire”, copy to the second work qubit, and flip the value of the target qubit, which is illustrated in the $CNOT$ gate at the end of section $3$. The subsequent reversal also makes sense from a logical standpoint. We have already either flipped or not flipped each of the work qubits with the current gate schematic, so if we apply the same schematic again, the work qubits should all yield zero. This is due to the fact that if we flip a qubit twice, it will return to its original value. Similarly, if we \textbf{don’t} flip a qubit twice, it will obviously remain in its initial state as well. Since the initial state of all the work qubits is $|0\rangle$, they will once again equal $|0\rangle$.
+\newline\newline
+As was previously stated, we can utilize this same logical though process, and generalize it to any $n$-qubit controlled gate.
+\newline\newline
+In section 6, we simply see that we are applying Toffoli ($2$-qubit Controlled-$NOT$ gates) to each possible combination of control qubits, and then doing the same thing with $CNOT$ gates. Finally, in section 7, we simply measure the target qubit. If it is found to be $|0\rangle$, then the perceptron has not fired, and if it is found to be $|1\rangle$, it has.
+\newline\newline
+Now that we have laid out the framework for the quantum perceptron algorithm, we can examine it a bit more in depth, and understand why it actually works. The first part of this algorithm simply checks to see if the number of qubits set to $|1\rangle$ exceeds the threshold. The problem is that we do not know the order in which these qubits will inputted, so even if these qubits set to $|1\rangle$ do in fact exist, we don't know where they are. In order to preserve the functionality of the algorithm, we can't measure the qubits in the middle of the circuit, so we have to find another way to check them. As it turns out, we can use Controlled-$NOT$ gates to do this. By setting the number of inputs to the gates being applied to this circuit, we are setting the condition that there must be a choice of qubits that exceeds the threshold, or else the circuit won't fire. Because we don't know the position of the different qubits, we must apply these gates to every combination of qubits. These gates will output a series of values, at least one of which will be $|1\rangle$, if the number of qubits set to $|1\rangle$ in the initial input is greater than the threshold. We can then apply all possible combinations of input gates for any number of "choices" of qubits from the complete set of the output qubits. The reason we do this is because this configuration will, if each of the gates is attached to one target qubit, always flip this qubit to $|1\rangle$ if there is at least one qubit in the set of qubits being inputted into it (in this case, the output qubits from the first part of the circuit) that is equal to $|1\rangle$. This can be proven mathematically, which I will demonstrate in the following paragraph.
+\newline\newline
+This proof actually comes to down to simple combinatorics. We want to show that if the number of input qubits initialized to $|1\rangle$ is above the absolute value of the bias, the circuit should output $|1\rangle$. Ultimately, we have to examine the mathematical parity of our target qubit (whether it has been flipped an even or odd number of times). Since the final target qubit is initialized to $|0\rangle$, it would make sense that an odd number of “flips” to this bit would correspond to the number of qubits being greater than $|b|$. If we have the mapping $0 \ \rightarrow \ 1$ and $1 \ \rightarrow \ 0$, and we apply it an odd number of times to the initial quantity of $0$, it should always return $1$. If we apply this mapping an even number of times, $0$ should always be the returned value. We are applying gates to each possible combination of qubits, for all possible quantities of qubits, meaning that for $n$ qubits, we will get:
+\newline
+\begin{center}
+$\text{\#  of  gates} \ = \ \displaystyle\sum_{k \ = \ 0}^{n} \ \begin{pmatrix}n \\ k \end{pmatrix}$
+\end{center}
+\vspace{7}
+We know that the number of gates will be the sum of all possible binomial coefficients, with a varying $k$ from $0$ to $n$. We can also prove the well-known mathematical relationship: that this sum is equal to $2^{n}$ using binomial theorem:
+\newline
+\begin{center}
+$(a \ + \ b)^{n} \ = \ \displaystyle\sum_{k \ = \ 0}^{n} \ \begin{pmatrix}n \\ k \end{pmatrix} \ a^{k} \ b^{n \ - \ k} \ \Rightarrow \ (2)^{n} \ = \ \displaystyle\sum_{k \ = \ 0}^{n} \ \begin{pmatrix}n \\ k \end{pmatrix}$
+\end{center}
+\vspace{7}
+In our circuit, there is no gate where we chose $0$ elements as input nodes, so we can simply remove this term:
+\newline
+\begin{center}
+$(2)^{n} \ = \ \displaystyle\sum_{k \ = \ 0}^{n} \ \begin{pmatrix}n \\ k \end{pmatrix} \ = \ \begin{pmatrix}n \\ 0 \end{pmatrix} \ + \ \displaystyle\sum_{k \ = \ 1}^{n} \ \begin{pmatrix}n \\ k \end{pmatrix} \ = \ 1 \ + \ \displaystyle\sum_{k \ = \ 1}^{n} \ \begin{pmatrix}n \\ k \end{pmatrix} \ \Rightarrow \ (2)^{n} \ - \ 1 \ = \ \displaystyle\sum_{k \ = \ 1}^{n} \ \begin{pmatrix}n \\ k \end{pmatrix}$
+\end{center}
+\vspace{7}
+So we now know that the number of gates in our circuit is equal to $(2)^{n} \ - \ 1$. We previously found that an even number of qubit-flips would yield an output of $|0\rangle$, while an odd number would yield $|1\rangle$. Obviously, $(2)^{n} \ - \ 1 \ = \ 1 \ \text{mod} \ 2$, therefore, this circuit will output $|1\rangle$ for all $n \ > \ 0$.
+\newline\newline
+You may now be thinking that this result is not very useful, since it only proves that we will yield a result of $|1\rangle$ when \textbf{all} the input qubits are set to $|1\rangle$. It turns out we can easily prove that this result holds true for any possible number of qubits set to $|1\rangle$ in the input to this part of the circuit, except for when \textbf{none} of the qubits are set to $|1\rangle$ (exactly what we need to prove in order for the circuit to work).
+\newline\newline
+Let’s think for a moment about which of these gates will affect different qubit configurations. For $n$ input qubits, where $a$ of those qubits are set to $|1\rangle$, and where $(0 \ < \ a \ < \ n)$, the qubits will only cause gates to fire where the number of input nodes is less than or equal to $a$. For example, if we set $n \ = \ 4$ and $a \ = \ 3$, then when those three qubits are passed through the $4$-qubit Controlled-$NOT$, nothing since only three are set to $|1\rangle$. This qubit configuration will only start to make gates fire when the number of input nodes is less than or equal to three, and even with that configuration, it won’t make all the possible gates of that size fire. For example, consider the configuration where we have three qubits, the first two of which are set to $|1\rangle$, and the last of which is set to $|0\rangle$. If we apply a Toffoli gate to the second and third qubits in this configuration, the gate won't fire despite the number of input nodes being less than or equal to $a$. The key to this is realizing that qubits initialized as $|0\rangle$ can essentially be disregarded, and since the number of qubits set to $|1\rangle$ obviously has to be less than or equal to the number of input qubits, the gate configuration, of all possible combinations, of all possible sizes, for $n$ qubits, will still have the same effect for any number $a$, since they are the only qubits actually being passed through the circuit.
+\newline\newline
+This may seem a bit confusing now, but to better visualize this, look back to the circuit diagram previously provided, and ask yourself what would happen if only two qubits were initialized as $|1\rangle$ (continue to disregard the Hadamard gates). You should observe that as you go through the circuit, all possible combinations of all possible sizes are applied to the two qubits set to $|1\rangle$, and that this circuit is equivalent to a circuit with $n \ = \ 2$ and $a \ = \ 2$. We have already proven a circuit with $a \ = \ n$ works, therefore, we have proven that regardless of the number of input qubits set to $|1\rangle$, as long as that number is greater than $0$, this circuit will output $|1\rangle$.
+\newline\newline
+\begin{center}
+$\textbf{Part 3: Testing the Activator Function with Qubits}$
+\end{center}
+\newline\newline
+In this next section, I will be going through an example of this circuit, along with the code, and will show how it is useful when coupled with the interesting quantum mechanical properties present in the field of quantum computing.
+\newline\newline
+In order to make the amount of code displayed in this article shorter, I coded the algorithm with Cirq for specifically the case of $4$ input qubits and a bias of $-1$, but hopefully I will be uploading to Github a version of the code where the user to dynamically vary the qubit input and the bias by only adjusting a variable in the coming weeks. I said earlier that I wanted to demonstrate how this algorithm is useful from a quantum computing standpoint, and I am going to demonstrate this by passing each of the input qubits through a Hadamard gate. I will run this circuit $20$ times, and it should become clear that with these inputs, we will get a result of $|0\rangle$ half the time, and $|1\rangle$ the other half. This is because with the input as a superposition of the two computational basis states, we are essentially activating and not activating the nodes to the gates simultaneously, and finding the probability that the gate will fire. With a bias of $-1$, we are looking for inputs that have at least two $|1\rangle$ qubits. For $n \ = \ 3$, there are exactly $4$ out of the $2^3 \ = \ 8$ possible inputs overall, and obviously, $4/8 \ = \ 0.5$. Therefore, we have a 50/50 chance of getting $|1\rangle$ or $|0\rangle$. We can start by initializing all of our qubits:
+\newline\newline
+\includegraphics[width=\textwidth]{one.png}
+\newline\newline
+We can then apply our initial Hadamard gates, as well as our Toffoli gates to each possible qubit combination (since $b \ = \ -1$):
+\newline\newline
+\includegraphics[width=\textwidth]{two.png}
+\newline\newline
+We then begin to apply our controlled gates to the output of the Toffoli combinations. In this next image, I created a general function that creates $n$-qubit controlled-$NOT$ gates for $n \ > \ 2$. Here, I am using it to create a $3$-qubit gate:
+\newline\newline
+\includegraphics[width=\textwidth]{three.png}
+\newline\newline
+We can then apply our remaining combinations of Toffoli and $CNOT$ gates, as well as our measurement function:
+\newline\newline
+\includegraphics[width=\textwidth]{four.png}
+\newline\newline
+We then finally create our simulator, and run the circuit:
+\newline\newline
+\includegraphics[width=\textwidth]{five.png}
+\newline\newline
+When I ran this circuit, I received this output:
+\newline\newline
+\includegraphics[width=\textwidth]{six.png}
+\newline\newline
+As can be seen, the circuit evaluated to $|1\rangle$ eleven times, and $|0\rangle$ nine times. That's pretty close to our expected value of ten and ten!
+\newline\newline
+As we vary the bias, the value of the input qubits, and the number of input qubits, the results should remain mathematically consistent with the expected probability (which can easily be calculated, as I did in the beginning of this section).
+\newline\newline
+\begin{center}
+$\textbf{Part 4: Why This is an Awful Circuit}$
+\end{center}
+\newline\newline
+This algorithm is horribly inefficient, and likely has no real applications in the real world, due to its inefficiency, but I thought that it was interesting regardless. As the number of input qubits gets higher, the number of qubits required to make this algorithm work becomes astronomical, therefore, this algorithm should only really be used on a small scale.
+\newline\newline
+\begin{center}
+$\textbf{Part 5: Future Work}$
+\end{center}
+\newline\newline
+To improve upon this algorithm in the future, I would like to capitalize upon all of the other useful elementary quantum gates at my disposal, in order to make the processes in this algorithm more efficient, and to reduce the number of qubits used. For example, while creating this circuit, I started toying around with the idea for another circuit that uses Controlled-phase gates to create a quantum divisibility algorithm, however, this algorithm is severely flawed. It takes a fairly large number of qubits to complete (although smaller than the first in many cases), and worst of all, there is an element of probability introduced, so there is a chance it wouldn't work in certain cases. Essentially, this algorithm functions by taking $n$ input qubits, and initializing some number of target qubits to equal superpositions, using Hadamard gates (the number of work qubits is what can be determined by the person utilizing the algorithm). Each target qubit is the target for $n$ Controlled phase shift gate of magnitude $e^{i\pi/t}$, where $t$ is the divisor, and each of the inputs to these gates is each of the input qubits. Finally, each of the input qubits is again passed through a Hadamard gate, and the results of each of the target qubits are put into an $a$-qubit Controlled-$NOT$ gate, where $a$ is the number of target qubits (this gate will usually require more work qubits). At the moment, the algorithm just ends here, with each of the qubits being measured and the person reading the output of the algorithm interpreting what the numbers mean, since if I were to incorporate this into some sort of activator function, I would have no control over the probability, and the circuit would likely not work. This algorithm is $100$ percent probable to return only $|0\rangle$ or $|1\rangle$ if whatever number of qubits sets to $|1\rangle$ in the input is divisible by $t$. The problem is that if the number of qubits set to $|1\rangle$ is close to $t$ or close to $0$, the probability of returning either only $|0\rangle$ or $|1\rangle$ is also very high, so the algorithm becomes useless.
+\newline\newline
+The reason that I mention this is because the concept of expressing "cyclical values" within controlled-phase gate seems interesting, and maybe there would be a way to apply it in the future, but at the moment, it seems like a fairly daunting task.
+\newline\newline
+In conclusion, there are likely many ways that this algorithm could be more efficient if it utilized more "quantum mechanical effects" than simply a large number of controlled-$NOT$ gates, and hopefully I will be able to uncover some of this in the future.
+\end{document}
