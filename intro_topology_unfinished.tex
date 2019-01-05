@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Introductory Topology Notes}
+\author{Jack Ceroni}
+\date{October 2018}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\noindent
+The main goal of this set of notes is to provide some annotations/explanation to some of the main ideas contained within James Munkres' introduction to topology. I will also try to solve as many problems as I can, and provide concise and conceptual explanations.\newline
+
+
+\section{Introduction to Topological Spaces}
+
+\vspace{6mm}
+
+\textbf{Topological Spaces} \newline \newline Let's define some set, $X$. We can then define a \textbf{topology} to be some set, $T$, of \textbf{open subsets}, where three axioms hold: \newline \newline 1. $X$ and $\emptyset$ are contained within $T$. \newline \newline 2. The union of all open subsets in $T$, is $T$. Mathematically speaking, this would mean for all open subsets, $O$, we can say that for any union of indexed open sets, then: $\bigcup_{n} \ O_n \ \in \ T$. \newline \newline 3. The intersection of finitely many subsets in $T$, is in $T$. Mathematically, this is formalized as, $\bigcap_{a} \ O_a \ \subset \ T$, where $n$ is some finite index. \newline \newline If we pair a topology together with its corresponding set, $X$, then we form a \textbf{topological space}, which can be denoted as $(X, \ T)$.
+\newline\newline
+The sets contained within a topology are called \textbf{open sets}.
+\newline\newline
+We can now define a few important terms. The \textbf{trivial topology} on some set $X$ is simply the topology $\{X, \ \emptyset \}$. We can look back to the three conditions we have set to define a topology and clearly see that this is in fact always a topology. Another important topology is the \textbf{discrete topology}, which is the topology on set $X$ that is equal to $\mathcal{P}(X)$, which is the power set of $X$. Using the previously defined conditions, We can easily prove that this is a topology as well.
+\newline\newline
+A good example of a topology that can provide some intuition as to how topologies are actually constructed is the \textbf{finite complement topology}, which, for a set $X$, is the topology that can be defined as all the subsets of $X$, where its complement is finite or the entire set. Let's go through each of the previously defined conditions for a topology, and show that the finite complement topology is in fact a true topology:
+\newline\newline
+1. $X$ and $\emptyset$ are contained within $T$ $ \ \Rightarrow \ $ By the definition of the finite complement topology, this condition is fulfilled. $X^{C}$ is $\emptyset$, so it is in $T$, since it is finite and $\emptyset^{C}$ is equivalent to $X$, which is the entire set, therefore it is in the topology.
+\newline\newline
+2. The union of all open subsets in $T$, is $T$ $ \ \Rightarrow \ $ We can utilize De Morgan's Laws to prove this statement. Remembering that: \newline\newline
+\begin{center}
+$\displaystyle\bigcup_{n} \ \big(U_{n}\big)^{C} \ = \ \Bigg(\displaystyle\bigcap_{n} \ U_{n}\Bigg)^{C} \ \ $ and $\ \ \ \displaystyle\bigcap_{n} \ \big(U_{n}\big)^{C} \ = \ \Bigg(\displaystyle\bigcup_{n} \ U_{n}\Bigg)^{C}$
+\end{center}
+We are trying to show that a union of sets still obeys the criterion for the finite complement topology, which is what the right side of the latter equation describes, as we want the complement of the union of sets in the topology is finite. We know that $\displaystyle\cap_{n} \ \big(U_{n}\big)^{C}$ will be finite, since each set, $\big(U_{n}\big)^{C}$, is finite, as per the definition of the topology (after all all of these $U_n$ sets are in the topology). \newline\newline
+3. The intersection of finitely many subsets in $T$, is in $T$ $ \ \Rightarrow \ $ A similar method to the previous condition can be used to prove this final statement. If we simply use the first of De Morgan's Laws, we know that each set $\big(U_{n}\big)^{C}$ in $\displaystyle\cup_{n} \ \big(U_{n}\big)^{C}$ will be finite, and that the finite union of finite sets will be finite, therefore $\displaystyle\cap_{n} \ \big(U_{n}\big)^{C}$ will be finite and the third condition is satisfied.
+\newline\newline
+\hspace*{\fill} $\qed$
+\newline\newline
+There are a few more terms that should be addressed. If we have a topology $F$ and a topology $T$, we can say that $F$ is \textbf{finer} than $T$ if $F \ \supset \ T$. Inversely, in this case, $T$ is \textbf{coarser} than $F$ , since $T \ \subset \ F$. We call $T$ and $F$ comparable if $T$ is either coarser or finer than $F$, or vice versa.
+\newline
+\section{Topological Bases}
+Bases are used to define topologies on a set, in terms of smaller collections of subsets. Bases, like topologies, are also collections of subsets of some set $X$.
+\newline\newline
+\textbf{Definition for a Topological Basis}
+\newline\newline
+We can define a basis $B$ on the set $X$ with the following conditions:
+\newline\newline
+1. For each $x$ in $X$, there exists a $\mathcal{B}$ in $B$ where $x \ \in \ \mathcal{B}$.
+\newline\newline
+2. For each $x$ in $X$ contained within $\mathcal{B}_1 \ \cap \ \mathcal{B}_2$, where $\mathcal{B}_1$ and $\mathcal{B}_2$ are in $B$, then there exists some $\mathcal{B}_3$ in $B$, where $x \ \in \ \mathcal{B}_3 \ \subset \ \mathcal{B}_1 \ \cap \ \mathcal{B}_2$.
+\newline\newline
+Now that we are equipped with the conditions to form a basis, we can now understand why bases are actually helpful. Bases allow us to generate topologies over sets. In fact, we can say that a basis can generate some topology if for each open set $U$ in that topology, there is some $\mathcal{B}$ in $B$, where for each $x \ \in \ U$, then $x \ \in \ \mathcal{B} \ \subset \ U$. (I am going to skip over the proof that the basis does in fact generate a topology for now).
+\newline\newline
+It is important to note that open sets can be expressed as some union of basis elements, meaning that a topology is actually just the collection of the unions of the elements in a basis. It is also important to note that if a topology is finer than some other topology, this also means that for each element $x$ in the coarser topology's basis, there is an element in the finer topology's basis that contains that point $x$, and is contained within the basis element of the coarser topology that contains $x$. (The proof for this statement is \textbf{very} intuitive).
+\newline\newline
+\textbf{Three Important Topologies}
+\newline\newline
+\textbf{Open interval} $ \ \Rightarrow \ (a, \ b) \ = \ \{x \ | \ a \ < \ x \ < \ b\}$
+\newline\newline
+\textbf{Half-Open interval (Closed on the left)} $ \ \Rightarrow \ [a, \ b) \ = \ \{x \ | \ a \ \leq \ x \ < \ b\}$
+\newline\newline
+1. \textbf{The standard topology} $ \ \Rightarrow \ $ The basis of the standard topology is defined as the collection of all real, open intervals.
+\newline\newline
+2. \textbf{The lower limit topology} $ \ \Rightarrow \ $ The basis of the lower limit topology is defined as the collection of all real, half-intervals (the lower side is closed while the upper side is open). In this case, we must explicitly state that the lower value of the interval is less than the upper value of the interval (this was implied for the standard topology).
+\newline\newline
+3. \textbf{The K-topology} $ \ \Rightarrow \ $ The basis K-topology is defined as the collection of all real, open intervals, as well as all of the real, open intervals, but excluding all elements in the from of $1/n$, with $n \ \in \ \mathbb{Z^{+}}$. 
+\newline\newline
+\textbf{Defining the Subbasis}
+\newline\newline
+The subbasis is another very interesting construction within basic topology. It allows us to construct a sort of "basis" (which we call a subbasis) that is formed by the union of intersections of subsets of some set $X$. To prove that the subbasis can generate a topology, we must simply demonstrate that the collection of all finite intersections of elements in the subbasis, is a basis for some topology. (I will not be showing this proof in these notes, but it is fairly straightforward, and presented very well in Munkres' book).
+\newline\newline
+\section{Solutions for Page 91-92 Exercises}
+\newline\newline
+1. Show that if $Y$ is a subspace of $X$, and $A$ is a subset of $Y$, then the topology that $A$ inherits as a subspace of $Y$ is the same topology it inherits as a subspace of $X$
+\newline\newline
+Solution: Defining the subspace topology on $A$ inherited from $Y$ as $T_{ay} \ = \ \{A \ \cap \ U_{y} \ | \ U_{y} \ \in \ Y\}$, and defining the subspace topology on $A$ inherited from $X$ as $T_{ax} \ = \ \{A \ \cap \ U_{x} \ | \ U_{x} \ \in \ X\}$ we can see that the topology on $Y$ inherited by $X$ is $T_{yx} \ = \ \{Y \ \cap \ U_{x} \ | \ U_{x} \ \in \ X\}$. This means that $T_{ay} \ = \ \{A \ \cap \ Y \ \cap \ U_{x} \ | \ U_{x} \ \in \ X\}$. The intersection of $Y$ and $A$ will obviously be $A$, so we get $T_{ay} \ = \ \{A \ \cap \ U_{x} \ | \ U_{x} \ \in \ X\}$, which is the same topology as the one that we defined on $A$ from $X$. $\blacksquare$
+\newline\newline
+\end{document}
