@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\title{Game Theory Notes}
+\author{Jack Ceroni}
+\date{February 2019}
+
+\begin{document}
+
+\maketitle
+\newpage
+\section{Problem Set Answers}
+\vspace{5mm}
+\textbf{Question 1}
+\newline\newline
+A Nash Equilibrium essentially is a set of strategies within a game where no other player can benefit from changing their strategy. In more rigorous terms, the payout function for the $i$-th player will always be less if this $i$-th  player changes their strategy while all the other players keep their strategy the same.  This is formalized by saying that the payout function for $i$-th player is always less (or equal) when they change their strategy, therefore the player has no incentive to change their strategy and the game is in a sort of "equilibrium". This is written like this: $f_i(s^1, \ s^2, ..., \ s^n) \ \geq \ f_i(s^1, ..., \ s^{i-1}, \ \hat{s}, \ s^{i+1}, ..., \ s^n)$. The $\hat{s}$ represents the $i$-th player changing their strategy, and their payout always being $\leq$ than the strategy tuple with their original personal strategy (in the Nash Equilibrium).
+\newline\newline
+An example of a Nash Equilibrium can be found in the answer to the following question.
+\newline\newline
+\textbf{Question 2}
+\newline\newline
+Yes, the first game does in fact have a strategy that yields a Nash Equilibrium. This can be proven fairly trivially. Through some consideration, we can see that this is only a $2\times2$ table, so we can check is each combination of strategies is a Nash equilibrium (if no player would benefit from changing their strategy). We can quickly see that by simply checking four combinations of strategies, that the tuple of strategies $(D, \ B)$ is a Nash equilibrium. If Player One changes their strategy from $D$ to $C$ the outcome of the game will be the same, and their payout will be the same. Similarly, if Player Two changes their strategy from $B$ to $A$, then they will have to pay Player One $1$ instead of $0$, making this outcome unfavourable to them. Since for each of the player of the game, their payout function is less or equal to their payout function with the combined strategy $(D, \ B)$, this is a Nash Equilibrium.
+\newline\newline
+\textbf{Question 3}
+\newline\newline
+This game does not have a \textbf{pure} strategy, however, by Nash's theorem, it must have some strategy, so we can assume that the Nash equilibrium point(s) for this game are mixed. The reason why this game doesn't have a pure strategy is because there is no point at which it is not beneficial for a player to change their strategy (increased value of payout function for at least one of the players). This can be seen fairly easily on the chart provided. If we pick a point (representing a combination of strategies) and we continue to ask the question: "Can any of the players change their strategy such that their payout is greater?". It turns out, if we do this, then we will keep looping back around to the same point, as there is always a greater payout for one of the players at any of the given points, if they change their strategy. 
+\newline\newline
+We can now consider the mixed strategy, where each of the players picks their strategy with some probability $p_i$. If we setup the same table but with probabilities $p$ and $1 \ - \ p$ for the respective Player 2 strategies, and $q$ and $1 \ - \ q$ for the respective Player 1 strategies.  Basically, we can solve this problem by finding the intersection of the lines representing the "weights" on the two different probabilities, for each player (when we calculate the expected value of the payout for either one of the players). We find that if the game is played optimally, the mixed Nash Equilibrium will occur when $p \ = \ 0.25$, $1 \ - \ p \ = \ 0.75$, $q \ = \ 0.25$, $1 \ - \ q \ = \ 0.75$.
+\newline\newline
+\textbf{Question 4}
+\newline\newline
+This is a fairly trivial procedure. If each of the three players is playing a mixed strategy, then the expected strategy of a player (the combined probabilities of each of the different possible strategies) can be expressed as $s^i \ = \ \sum_{k \ = \ 1}^{n} \ p_ks_k$ with $s_k \ \in \ S$, meaning that there is some probability $p_k$ of the $k$-th strategy, $s_k$, in the set of Player $i$ strategies being chosen when the game is played. For three, players, the payout function for any of the three players is given by the following definition:
+\begin{center}
+    $f_k(s^1, \ s^2, \ s^3) \ = \ \displaystyle\sum_{a}\displaystyle\sum_{b}\displaystyle\sum_{c} \ p_ap_bp_c f_k(s_a, \ s_b, \ s_c)$
+\end{center}
+Where $a$, $b$, and $c$ range from $1$ to $n$. This is because we now have all the combinations of strategies that could be yielded within the game (with each combination have strategies having a probability as the product of each of the individual probabilities of the individuals playing their individual strategies).
+\newline\newline
+\textbf{Question 5}
+\newline\newline
+To answer this question, we are asked to chose one of the games above. I will chose the game in Question 3, however, the exact same process would easily yield these values for the game given in the introduction of the note as well. Firstly, we are asked to find the set of all the mixed strategies of player $i$. Since we know that the general form for an element of the set of mixed strategies for player $i$ is $x \ \in \ X^i \ \Rightarrow \ x \ = \ s^i \ = \ \sum_{k \ = \ 1}^{n} \ p^a_ks_k$ with $s_k \ \in \ S^i$. In order to find all mixed strategies, we must vary the $p$-value weights associated with a probability of choosing each individual strategy. We will call this set of all combinations of probabilities $P$, indexed by $a$, so a general element of $P$ will be $p^a$.
+\newline\newline
+In order to compute this for the game is Question 3, we need to look at both the strategies to be chosen by Player $1$ and Player $2$, denoted by $X^1$ and $X^2$. $X^1$ will look like:
+$$\{x^1 \ = \ Tp^a \ + \ B(1 \ - \ p^a) \ | \ p^a \ \in \ \mathbb{R} \ \Rightarrow \ 0 \ \leq \ p^a \ \leq \ 1\}$$
+And $X^2$ will be in the form:
+$$\{x^2 \ = \ Lp^a \ + \ R(1 \ - \ p^a) \ | \ p^a \ \in \ \mathbb{R} \ \Rightarrow \ 0 \ \leq \ p^a \ \leq \ 1\}$$
+Next, we have to compute $X$ which is the set of all tuples of strategies, yielded by taking the Cartesian product: $X^1 \times \ ... \ \times X^n$. For the game in Question 3, we have $X \ = \ X^1 \times X^2$. $X$ will be in the form:
+$$x \ = \ (x^1, \ x^2) \ = \ \{(Tp^a \ + \ B(1 \ - \ p^a), \ Lp^b \ + \ R(1 \ - \ p^b) ) \ | \ p^a, \ p^b \ \in \ \mathbb{R} \ \Rightarrow \ 0 \ \leq \ p^a, \ p^b \ \leq \ 1\}$$
+It is important to remember that we have to consider all combinations of probabilities for Player 1 and Player 2. To demonstrate this, we index the $p$-values by different letters, $a$ and $b$.
+\newline\newline
+The payout function for the mixed strategies for the game in Question 3 is given for Player 1 as $H(X) \ = \ M \ \cdot \ (x^1 \ \otimes \ x^2) \ = \ 4p^ap^b \ + \ p^a(1 \ - \ p^b) \ + \ 2(1 \ - \ p^a)p^b \ + \ 3(1 \ - \ p^b)(1 \ - \ p^a)$. There are probably many ways to define this, but I will do it as follows. Let the strategy chosen by any player be a matrix of $n$ entries (representing the number possible pure strategies). We can define a specific strategy by the unit vector, with an entry of $1$ in the $i$-th strategy in the $n$-tuple vector. We can take the tensor product of the two strategy vectors with their corresponding probability coefficients. We then take the Frobenius inner product of this matrix with the payout matrix, representing all possible payouts of the game, corresponding to all possible combinations of strategies. For Player 2, the function will be the same, but just negative, since Player 2 is paying Player 1.
+\newline\newline
+This is simply the case in which one of the player's strategies is removed from the game. For example, if I wanted to compute $x^{-2}$ for the game in Question 3, we would get:
+$$x \ = \ (x^1) \ = \ \{Tp^a \ + \ B(1 \ - \ p^a) | \ p^a, \ \in \ \mathbb{R} \ \Rightarrow \ 0 \ \leq \ p^b \ \leq \ 1\}$$
+\newline\newline
+This definition essentially means that if we remove the $i$-th player's strategy and replacde it with another strategy, and then calculate the payout function, it will always be $\leq$ to the payout function at $\bar{x}$. This is the definition of the Nash Equilibrium. For example, if we know that for Question 3 to be in an Equilibrium, $p^a, \ p^b \ = \ 0.25$, so:
+$$\bar{x} \ = \ \{(0.25T \ + \ 0.75B, \ 0.25L \ + \ 0.75R)\} \ \Rightarrow \ H(\bar{x}) \ = \ 2.5$$
+We have already completed a rigorous proof that this value is the Nash Equilibrium, therefore if the probabilities of player $i$'s mixed strategy is changed, the payout function will yield a lesser value.
+\newline\newline
+This quantity is trivial to compute. We are looking for the size of the set of pure strategies for any player. For both players in this game, $|S^i| \ = \ 2$. If we are considering the set of strategies \textbf{including the mixed strategies}, then the size of the set is unaccountably infinite for both players, since the set $P$ of values for $p^a$ is uncountably infinite.
+\newline\newline
+\textbf{Question 6}
+\newline\newline
+Again, it is fairly trivial to demonstrate that $X^i$ is a simplex. The definition of the simplex is as follows:
+$$C \ = \ \Big\{ a_0x_0 \ + \ ... \ + \ a_kx_k \ \Big | \displaystyle\sum_{h=0}^{k} \ a_h, \ a_h \ \geq \ 0 \Big\}$$
+This is a set of linear combinations in which the coefficients on each term in the sum will add up to $1$ (and also be strictly greater than or equal to zero). Some criteria for the general simplex also requires the points (represented by position vectors) to be affinely independent, but since we can chose whatever vectors we want to represent our strategies as $k$ points in $\mathbb{R}^{k+1}$, then we can say that this criteria is fulfilled. In addition, it is obvious the coefficients in any such element of $X^i$ will be greater than $0$ and will sum to $1$, as the coefficients represent probabilities, and therefore must sum to $1$. In addition, we can't have negative probability, so each coefficient will be greater than $0$. Therefore, we have demonstrated that $X^i$ is a simplex.
+\end{document}
