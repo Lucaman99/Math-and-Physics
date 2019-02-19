@@ -31,7 +31,7 @@
 **Game Theory**
 
 - Problem Set Solutions: https://www.overleaf.com/read/qrhmwzmynwjw
-- UofT Research Session #1 Notes
+- UofT Research Session #1 Notes (Not Done Typing): https://www.overleaf.com/read/nxrrsqgmkhnn
 
 **Applied Math**
 
