@@ -3,12 +3,12 @@
 **General Topology**
 
 - Solutions for Munkres (In the Process of Typing These Up From Notebook): https://www.overleaf.com/read/pnwkxbtgqkhw
-- Some notes for certain parts
+- Some notes for certain parts (NOT COMPLETE): https://www.overleaf.com/read/vtcqhhckrjgs
 - Session #2 Notes
 
 **Quantum Mechanics**
 
-- Introductory Notes
+- Introductory Notes (Need to Type Up)
 - Heisenberg Uncertainty Principle Derivation: https://mathacademy.quora.com/The-Lesser-Known-Uncertainty-Principle
 
 **Abstract Algebra**
