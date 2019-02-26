@@ -31,6 +31,7 @@
   **12 Days of Math-Mas 2018**
   
   Day 1: https://brilliant.org/problems/the-first-day-of-math-mas-its-that-time-of-year/?ref_id=1554461
+  
   Day 2: https://brilliant.org/problems/day-2-snow-day/?ref_id=1554763
   Day 3: https://brilliant.org/problems/day-3-the-skating-rink/?ref_id=1555067
   Day 4: https://brilliant.org/problems/day-4-its-lovely-weather-for-a-sleigh-ride/?ref_id=1555333
