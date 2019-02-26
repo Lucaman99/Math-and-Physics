@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\title{Game Theory Notes}
+\author{Jack Ceroni}
+\date{February 2019}
+
+\begin{document}
+
+\maketitle
+\newpage
+\section{Game Theory and Definitions}
+Game theory is the mathematical consideration of collections of players interacting a logic fashion, each with the goal of maximizing their personal outcome. The applications of such a field of study are wide ranging, from politics, to optimization, to biology. This note will provide some background to some core ideas within game theory, and will carefully outline the important concept known as a \textbf{mixed strategy} played within a game.
+\newline\newline
+We define a game as a collection of a few different elements. In order to have a game, we must have a set of $n$ players playing the game, we must have a set of actions, for each player, which we will call $S^i$ for each $i$ from $1$ to $n$, and finally, we need a payout function, which maps a tuple of strategies from each player's set of strategies to the real numbers, giving a payout value for each player, if a given set of strategies is played. The payout function for the $i$-th person is defined in this fashion: $f^i: \ S^1 \times S^2 \times ... \times S^n \ \rightarrow \ \mathbb{R}$.
+\newline\newline
+With these guidelines, we can now define a very important concept within game theory, that of the \textbf{Nash equilibrium}. Essentially, the Nash equilibrium is a set of $n$ strategies in an $n$-player game such that no player will benefit (obtain a higher payout value from the payout function) by changing their strategy in the Nash equilibrium. We have denoted the payout function for the $i$-th player as $f^i$, so this means that for any $i$-th player in the game, if they change their strategy in the Nash equilibrium to some new strategy, which we will call $\hat{s}$, the payout function will always be less than or equal to before they made the change. Mathematically, this is represented as: $f^i(s_1, \ s_2, \ ... \ , \ s_{n-1}, \ s_n) \ \geq \ f^i(s_1, \ s_2, \ ... \ , \ s_{i-1}, \ \hat{s}, \ s_{i+1}, \ ... \ , \ s_{n-1}, \ s_n)$. As can be seen, when the $i$-th player changed their strategy changes their strategy, their payout becomes less. A Nash equilibrium occurs when this statement is true for each player $i$ from $1$ to $n$.
+\section{Mixed Strategies}
+In order to understand the basics of game theory, and important concept to consider is the idea of mixed strategies. A mixed strategy is essential a strategy in a game where players chose their "pure strategic options" probabilistically. This means, that the strategy $s$ will be a linear combination of all possible pure strategies that a player can chose within a game, with coefficients representing probabilities of the player picking a strategy: $s \ = \ p_1s_1 \ + \ ... \ + \ p_ns_n$. Mixed probabilities are an incredibly important result within game theory, as they are crucial in the realization of Nash's theorem, which states that any game has some point which is a Nash equilibrium. Each of the strategies played in this game can either be pure, which means a player chooses the strategy which they will play non-probabilistically, or mixed, which means they do choose their strategies probabilistically.
+\newline\newline
+To find a Nash equilibrium in a game of all pure strategies, it is fairly simple (although it can get tedious for very large games, with many possible combinations of strategies). With mixed strategies, it is a bit more difficult, mathematically speaking. First, we must start off with some game. For the sake of this question, let us use this example:
+\begin{center}
+\includegraphics[width=80]{game.png}
+\end{center}
+This is a fairly simple, however, upon inspection, it can be revealed that there is no apparent pure strategy combination that arrives at a Nash equilibrium. This can be demonstrated by picking any starting point on the table, and constantly asking the question "Can either of the players change their strategy to get a higher payout for themselves?". If the answer is yes, change this player's strategy and ask the question again. It will become clear that if this continues, the person conducting this exercise will continue to circle around each of the strategies endlessly, therefore, there is no pure strategy Nash equilibrium.
+\newline\newline
+Instead, this problem must be examined probabilistically. Rather than a discrete payout, we will have an expected payout for each of the players. For Player 1 (choosing strategies on the column), for example, this will be $E_{P1}(p, \ q) \ = \ 4pq \ + \ p(1 \ - \ q) \ + \ 2q(1 \ - \ p) \ + \ 3(1 \ - \ p)(1 \ - \ q)$, where $p$ is the probability that Player 1 chooses a certain strategy, and $q$ is the  probability that Player 2 chooses a certain strategy. This expectation value can be rearranged as $E_{P1}(p, \ q) \ = \ 4pq \ + \ p(1 \ - \ q) \ + \ 2q(1 \ - \ p) \ + \ 3(1 \ - \ p)(1 \ - \ q) \ = \ (1 \ - \ q)(3 \ - \ 2p) \ + \ q(2 \ + \ 2p)$. This expresses the probabilities in a sort of "liner combination" of choices for Player 2. The first term represents "how much" of the $R$ strategy is included in his mixed strategy, since $1 \ - \ q$ is the probability that he chooses this strategy. The same goes for the second term being "how much" of the $L$ strategy is in the mixed strategy. Since Player 2 has to pay Player 1 whatever value is arrived at in the table, Player 2 will want to minimize this expectation value, and he will chose $q$ to do just that, therefore, when Player 1 plays their strategy, Player 2 will play a strategy such that he has to pay min($2 \ + \ 2p, \ 3 \ - \ 2p$).
+\newline\newline
+Since we assume complete logic and foresight, Player 1 is smart enough to know what Player 2 is thinking and realizes that if Player 2 is going to pay them min($2 \ + \ 2p, \ 3 \ - \ 2p$), they need to maximize this value, therefore finding max(min($2 \ + \ 2p, \ 3 \ - \ 2p$)). This may seem complicated, but it can be found by simply finding the intersection between the two lines nestled within the function. The reason for doing this is that the the minimum value of the two graphs is chosen, and this has to be maximized, this maximum will be found at the intersection, since this is where min($2 \ + \ 2p, \ 3 \ - \ 2p$) switches from one value to another. This idea is best represented graphically. If this is the graph representing the two lines, ranging over all possible values of $p$:
+\begin{center}
+\includegraphics[width=150]{game2.png}
+\end{center}
+Then the section of this graph representing min($2 \ + \ 2p, \ 3 \ - \ 2p$) will be the red section of the two lines:
+\begin{center}
+\includegraphics[width=150]{game3.png}
+\end{center}
+As can be seen, the maximum of the red graph is the point where the lines intersect, so this will be the optimal value of $p$ for Player 1 to use. We can solve for $2 \ + \ 2p \ = \ 3 \ - \ 2p$ and find that $p \ = \ 0.25$, therefore, $1 \ - \ p \ = \ 0.75$. We can repeat this exercise, but instead, examine the expected payout function for Player 2. We will find that $q \ = \ 0.25$ and $1 \ - \ q \ = \ 0.75$, and so, we have found our mixed strategy Nash equilibrium.
+\end{document}
