@@ -26,7 +26,9 @@
 
 **Recreational Math**
 
-- Christmas 2018 Recreational Problem Set: NEW LINK WILL BE UP SOON
+- Christmas 2018 Recreational Problem Set: PDF Version Coming Soon. For now, problems are at the following links. Solutions can be found by clicking the "View solutions" button on each page, however, you must have a Brilliant.org account to view this section of the site (this is why I'm making the PDF version).
+
+  12 Days of Math-Mas 2018
 
 **Game Theory**
 
