@@ -4,7 +4,7 @@
 
 - Solutions for Munkres (In the Process of Typing These Up From Notebook): https://www.overleaf.com/read/pnwkxbtgqkhw
 - Some notes for certain parts (NOT COMPLETE): https://www.overleaf.com/read/vtcqhhckrjgs
-- Session #2 Notes
+- Session #2 Notes: https://www.overleaf.com/read/hstpcvzyjnjk
 
 **Quantum Mechanics**
 
