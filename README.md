@@ -18,7 +18,7 @@
 - Deutsch's Algorithm: https://mathacademy.quora.com/Quantum-Algorithm-Simulation-with-Cirq
 - QFT, Order Finding and Phase Estimation: https://mathacademy.quora.com/The-Quantum-Fourier-Transform
 - Quantum Perceptron: https://www.overleaf.com/read/ntfrnmkkbmpf
-- Quantum Annealing
+- Quantum Annealing: https://www.quora.com/q/zvlfybjixsacizwt/Logic-Gate-Simulation-on-a-D-Wave-Quantum-Annealing-Simulator
 
 **Classical Mechanics**
 
