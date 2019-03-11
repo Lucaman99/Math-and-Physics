@@ -56,8 +56,9 @@
 
 **Game Theory**
 
-- Problem Set Solutions: https://www.overleaf.com/read/qrhmwzmynwjw
-- UofT Research Session #1 Notes (Not Done Typing): https://www.overleaf.com/read/nxrrsqgmkhnn
+- Problem Set Solutions #1: https://www.overleaf.com/read/qrhmwzmynwjw
+- UofT Research Session #1 Notes: https://www.overleaf.com/read/nxrrsqgmkhnn
+- Problem Set Solutions #2: https://www.overleaf.com/read/jgbgvdyqmqqt
 
 **Applied Math**
 
