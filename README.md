@@ -5,6 +5,7 @@
 - Solutions for Munkres (In the Process of Typing These Up From Notebook): https://www.overleaf.com/read/pnwkxbtgqkhw
 - Some notes for certain parts (NOT COMPLETE): https://www.overleaf.com/read/vtcqhhckrjgs
 - Session #2 Notes: https://www.overleaf.com/read/hstpcvzyjnjk
+- Problem Set Solutions #2: https://www.overleaf.com/read/jgbgvdyqmqqt
 
 **Quantum Mechanics**
 
@@ -58,7 +59,6 @@
 
 - Problem Set Solutions #1: https://www.overleaf.com/read/qrhmwzmynwjw
 - UofT Research Session #1 Notes: https://www.overleaf.com/read/nxrrsqgmkhnn
-- Problem Set Solutions #2: https://www.overleaf.com/read/jgbgvdyqmqqt
 
 **Applied Math**
 
