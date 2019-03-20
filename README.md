@@ -63,4 +63,5 @@
 **Applied Math**
 
 - Forest Fire Simulation Whitepaper: https://www.overleaf.com/read/wnzcbwnkgqrb
+- Forest Fire Modelling Concepts + Drossel-Schwabl Paper Notes: https://www.overleaf.com/read/tgtchywysmtj
 
