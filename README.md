@@ -6,6 +6,7 @@
 - Some notes for certain parts (NOT COMPLETE): https://www.overleaf.com/read/vtcqhhckrjgs
 - Session #2 Notes: https://www.overleaf.com/read/hstpcvzyjnjk
 - Problem Set Solutions #2: https://www.overleaf.com/read/jgbgvdyqmqqt
+- Problem Set Solutions #3: https://www.overleaf.com/read/skcvmvbfjrcv
 
 **Quantum Mechanics**
 
