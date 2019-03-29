@@ -12,6 +12,7 @@
 
 - Introductory Notes (Need to Type Up)
 - Heisenberg Uncertainty Principle Derivation: https://mathacademy.quora.com/The-Lesser-Known-Uncertainty-Principle
+- Solutions to Griffiths QM (Unfinished): https://lucaman99.github.io/qm/menu
 
 **Abstract Algebra**
 
