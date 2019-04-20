@@ -16,6 +16,10 @@
 
 **Abstract Algebra**
 
+**Fluid Mechanics**
+
+- Introductory Notes on Tensor Analysis and Fluid DynamicsS: https://lucaman99.github.io/physics/vutha_meeting
+
 **Quantum Computing**
 
 - Deutsch's Algorithm: https://mathacademy.quora.com/Quantum-Algorithm-Simulation-with-Cirq
