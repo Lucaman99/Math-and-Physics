@@ -7,6 +7,7 @@
 - Session #2 Notes: https://www.overleaf.com/read/hstpcvzyjnjk
 - Problem Set Solutions #2: https://www.overleaf.com/read/jgbgvdyqmqqt
 - Problem Set Solutions #3: https://www.overleaf.com/read/skcvmvbfjrcv
+- Knot Theory (Introduction): https://mathacademy.quora.com/Knots
 
 **Quantum Mechanics**
 
