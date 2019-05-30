@@ -61,6 +61,8 @@
   Day 11: https://brilliant.org/problems/day-11-hot-chocolate/?ref_id=1557189
   
   Day 12: https://brilliant.org/problems/day-12-twas-the-night-before-christmas/?ref_id=1557451
+  
+  All of my other Brilliant.org solutions: https://brilliant.org/profile/jack-tj20jb/solutions/
 
 **Game Theory**
 
