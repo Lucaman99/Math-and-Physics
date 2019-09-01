@@ -1,3 +1,5 @@
+September 1st, 2019: "JEEZ THIS IS REALLY NOT UP-TO-DATE, CHANGES COMING SOON"
+
 # Math and Physics Projects
 
 **General Topology**
